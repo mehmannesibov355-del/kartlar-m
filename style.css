@@ -1,0 +1,323 @@
+/* --- Əsas Sıfırlama və Fon --- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #002200; /* Çox tünd yaşıl */
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
+
+.screen {
+    width: 100%;
+    max-width: 500px;
+    min-height: 100vh;
+    box-sizing: border-box;
+    padding: 20px;
+    display: none;
+    position: relative;
+    z-index: 1; /* Kontent fon üzərində olsun */
+}
+
+.active-screen {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Qızılı/Yaşıl Rənglər --- */
+.gold-text { color: #ffd700; }
+.gold-border { border: 2px solid #ffd700; box-shadow: 0 0 8px rgba(255, 215, 0, 0.7); }
+.gold-button {
+    background-color: #ffd700;
+    color: #1a1a1a;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.gold-button:hover { background-color: #ffc400; transform: scale(1.02); }
+.gold-button.border-only {
+    background: transparent;
+    color: #ffd700;
+    border: 2px solid #ffd700;
+}
+.gold-button.small-button {
+    padding: 8px 12px;
+    font-size: 0.9em;
+    width: auto;
+}
+.gold-button.full-width {
+    width: 100%;
+}
+
+/* --- 1. Giriş Ekranı Fonu (3D Duman) --- */
+.fog-background {
+    background-color: #004d40; /* Açıq yaşıl fon */
+    overflow: hidden;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+}
+.fog-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: fog-move 60s linear infinite;
+    z-index: 0;
+}
+
+@keyframes fog-move {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+    50% { transform: translate(-50%, -50%) scale(1.5); opacity: 0.6; }
+    100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 350px;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+}
+.app-title {
+    font-size: 2.5em;
+    color: #ffd700;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.9);
+    margin-bottom: 50px;
+}
+.form-box {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    border-top: 3px solid #ffd700;
+}
+input {
+    background-color: #222 !important;
+    border: 1px solid #ffd700 !important;
+    margin-bottom: 15px;
+}
+.back-button {
+    background: transparent;
+    color: #fff;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* --- 2. Oyun Ekranı (Masalar) --- */
+.green-background { background-color: #004d40; } /* Tünd yaşıl fon */
+
+.top-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.left-corner { align-self: flex-start; }
+.right-corner { align-self: flex-end; }
+.middle-controls { display: flex; gap: 10px; }
+
+.balance-info {
+    padding: 5px 10px;
+    background-color: #002200;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+.balance-info span { color: #ffd700; }
+
+.section-title { margin-bottom: 15px; }
+
+/* Masaların Görünüşü */
+#tables-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+.poker-table-card {
+    background-color: rgba(0, 0, 0, 0.4);
+    padding: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 5px solid #ffd700; /* Qızılı Kant */
+    position: relative;
+    transition: background-color 0.2s;
+}
+.poker-table-card:hover { background-color: rgba(0, 0, 0, 0.6); }
+.poker-table-card .table-name { font-weight: bold; }
+.poker-table-card .table-limit { font-size: 0.9em; color: #ccc; }
+.poker-table-card .full { color: #dc3545; }
+
+.join-table-btn {
+    background: transparent;
+    border: none;
+    color: #ffd700;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+/* --- 3. Oyun Masası Ekranı --- */
+.table-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+.table-header .gold-button { position: absolute; left: 0; }
+
+.poker-table-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.poker-table-felt {
+    width: 95%;
+    max-width: 480px;
+    height: 400px;
+    background-color: #003300; /* Tünd yaşıl masa */
+    border-radius: 50% / 70px; /* Poker masası fiquru */
+    padding: 10px;
+    position: relative;
+    margin-top: 30px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.poker-seats { position: absolute; width: 100%; height: 100%; }
+.seat { position: absolute; text-align: center; }
+/* Oturacaq yerləşdirməsi (sadələşdirilmiş) */
+.seat-1 { bottom: 0; left: 50%; transform: translateX(-50%); } 
+.seat-2 { bottom: 50%; left: 0; transform: translateY(-50%); } 
+.seat-3 { top: 0; left: 25%; transform: translateX(-50%); } 
+.seat-4 { top: 0; left: 50%; transform: translateX(-50%); } 
+.seat-5 { top: 0; right: 25%; transform: translateX(50%); } 
+.seat-6 { bottom: 50%; right: 0; transform: translateY(-50%); }
+
+.player-photo {
+    width: 50px;
+    height: 50px;
+    background-color: #555;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin: 0 auto 5px;
+}
+.seat-1 .player-photo { border-color: #ffd700; } /* Aktiv oyunçu */
+
+.player-cards { display: flex; justify-content: center; gap: 3px; margin-top: 5px; }
+.card { width: 35px; height: 50px; border-radius: 4px; display: flex; justify-content: center; align-items: center; font-weight: bold; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); }
+.my-cards .card { background-color: #fff; color: #1a1a1a; }
+.back-card { background-color: #dc3545; color: #fff; font-size: 1.2em; }
+
+/* Oturma Düyməsi */
+.sit-down-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.1em;
+}
+
+/* Oyun Kontrolları */
+.player-controls {
+    position: absolute;
+    top: 60px; /* Kartların altında */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+}
+.game-control-btn {
+    padding: 8px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    color: #fff;
+    font-size: 0.9em;
+    width: 80px;
+}
+.red-bg { background-color: #dc3545; } /* Pas At */
+.blue-bg { background-color: #007bff; } /* Xod Artır */
+.green-bg { background-color: #28a745; } /* İrəli */
+
+/* Geri Sayım (Timer) */
+.timer-ring {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    overflow: hidden;
+}
+.timer-progress {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(black 360deg, transparent 0deg); /* Qara fon */
+    opacity: 0.8;
+}
+
+/* --- 5. Depozit Modalı --- */
+.modal {
+    position: fixed; 
+    z-index: 100; 
+    background-color: rgba(0,0,0,0.8); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: #002200; /* Tünd Yaşıl */
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%; 
+    max-width: 400px;
+    position: relative;
+    text-align: center;
+}
+.close-button { color: #ffd700; float: right; font-size: 2em; cursor: pointer; }
+
+#leo-deposit-amount {
+    font-size: 1.1em;
+    text-align: center;
+}
+
+.card-number-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ffd700;
+    margin: 10px 0;
+    font-weight: bold;
+}
+.warning-text { color: #ccc; margin-bottom: 10px; font-size: 0.9em; }
+
+.timer-display {
+    font-size: 2em;
+    font-weight: bold;
+    color: #ffd700;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+.hidden { display: none !important; }

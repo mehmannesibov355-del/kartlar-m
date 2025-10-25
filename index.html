@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kart Oyunu: Giriş</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <div id="login-screen" class="screen active-screen fog-background">
+        <div class="content-wrapper">
+            <h1 class="app-title">Kart Oyunu</h1>
+            <div class="form-box">
+                <h2 class="welcome-text gold-text">Xoş Gəlmisiniz</h2>
+                
+                <div id="login-form-container">
+                    <h3 class="action-title">Giriş</h3>
+                    <form id="login-form">
+                        <input type="email" id="login-email" placeholder="Gmail" required>
+                        <input type="password" id="login-password" placeholder="Parol" required>
+                        <button type="submit" class="gold-button">Giriş Et</button>
+                    </form>
+                    <p>Hələ hesabınız yoxdur?</p>
+                    <button id="show-register" class="gold-button border-only">Qeydiyyatdan Keç</button>
+                </div>
+                
+                <div id="register-popup" class="form-box hidden">
+                    <h3 class="action-title">Qeydiyyat</h3>
+                    <form id="register-form">
+                        <input type="text" id="reg-name" placeholder="Ad, Familya" required>
+                        <input type="email" id="reg-email" placeholder="Gmail" required>
+                        <input type="password" id="reg-password" placeholder="Parol" required>
+                        <button type="submit" class="gold-button">Təsdiq Et</button>
+                    </form>
+                    <button id="back-to-login" class="back-button"><i class="fas fa-arrow-left"></i> Geri</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen green-background hidden">
+        <div class="top-controls">
+            <button id="logout-button" class="gold-button small-button left-corner"><i class="fas fa-sign-out-alt"></i> Çıxış Et</button>
+            
+            <div class="middle-controls">
+                <button id="deposit-button" class="gold-button small-button"><i class="fas fa-plus"></i> Depozit</button>
+                <button id="withdrawal-button" class="gold-button small-button"><i class="fas fa-minus"></i> Çıxarış</button>
+            </div>
+            
+            <div class="balance-info gold-border right-corner">
+                Balans: <span id="current-balance">0.00 AZN</span>
+            </div>
+        </div>
+
+        <h2 class="section-title gold-text">Poker Masaları (6 Nəfərlik)</h2>
+        <div id="tables-list">
+            <div class="poker-table-card" data-id="1" data-min="5.00" data-players="4">
+                <span class="table-name">Masa 1: Yüngül (4/6)</span>
+                <span class="table-limit">Min. 5.00 AZN</span>
+                <button class="join-table-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="poker-table-card" data-id="2" data-min="5.00" data-players="1">
+                <span class="table-name">Masa 2: Başlanğıc (1/6)</span>
+                <span class="table-limit">Min. 5.00 AZN</span>
+                <button class="join-table-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+            <div class="poker-table-card" data-id="3" data-min="5.00" data-players="6" data-full="true">
+                <span class="table-name full">Masa 3: DOLU (6/6)</span>
+                <span class="table-limit">Min. 5.00 AZN</span>
+                <button class="join-table-btn"><i class="fas fa-eye"></i> Bax</button>
+            </div>
+            <div class="poker-table-card" data-id="4" data-min="5.00" data-players="0">
+                <span class="table-name">Masa 4: BOŞ (0/6)</span>
+                <span class="table-limit">Min. 5.00 AZN</span>
+                <button class="join-table-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+             <div class="poker-table-card" data-id="5" data-min="5.00" data-players="3">
+                <span class="table-name">Masa 5: Orta (3/6)</span>
+                <span class="table-limit">Min. 5.00 AZN</span>
+                <button class="join-table-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+             <div class="poker-table-card" data-id="6" data-min="5.00" data-players="5">
+                <span class="table-name">Masa 6: Son (5/6)</span>
+                <span class="table-limit">Min. 5.00 AZN</span>
+                <button class="join-table-btn"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="game-table-screen" class="screen green-background hidden">
+        <header class="table-header">
+            <button id="exit-table-button" class="gold-button small-button left-corner"><i class="fas fa-sign-out-alt"></i> Çıxış</button>
+            <h1 class="screen-title gold-text">Oyun Masası</h1>
+        </header>
+
+        <div class="poker-table-area">
+            <div class="poker-table-felt gold-border">
+                <div class="poker-seats">
+                    <div class="seat seat-1" data-id="1">
+                        <div class="player-photo"></div>
+                        <div class="timer-ring"><div class="timer-progress"></div></div>
+                        <div class="player-cards my-cards hidden">
+                            <div class="card my-card">Q</div><div class="card my-card">7</div><div class="card my-card">A</div>
+                        </div>
+                        <div class="player-controls hidden">
+                            <button class="game-control-btn red-bg" data-action="pass">Pas At</button>
+                            <button class="game-control-btn blue-bg" data-action="raise">Xod Artır</button>
+                            <button class="game-control-btn green-bg" data-action="forward">İrəli</button>
+                        </div>
+                    </div>
+                     <div class="seat seat-2" data-id="2"><div class="player-photo"></div><div class="player-cards"><div class="card back-card">?</div><div class="card back-card">?</div><div class="card back-card">?</div></div></div>
+                     <div class="seat seat-3" data-id="3"><div class="player-photo"></div><div class="player-cards"><div class="card back-card">?</div><div class="card back-card">?</div><div class="card back-card">?</div></div></div>
+                     <div class="seat seat-4" data-id="4"><div class="player-photo"></div><div class="player-cards"><div class="card back-card">?</div><div class="card back-card">?</div><div class="card back-card">?</div></div></div>
+                     <div class="seat seat-5" data-id="5"><div class="player-photo"></div><div class="player-cards"><div class="card back-card">?</div><div class="card back-card">?</div><div class="card back-card">?</div></div></div>
+                     <div class="seat seat-6" data-id="6"><div class="player-photo"></div><div class="player-cards"><div class="card back-card">?</div><div class="card back-card">?</div><div class="card back-card">?</div></div></div>
+                </div>
+            </div>
+             <button id="sit-down-button" class="sit-down-btn gold-button">Oturmaq Üçün Klikləyin</button>
+        </div>
+    </div>
+
+    <div id="deposit-modal" class="modal hidden">
+        <div class="modal-content gold-border">
+            <span class="close-button">&times;</span>
+            <h3 class="modal-title gold-text">Depozit Qoy</h3>
+            
+            <button id="method-leo-card" class="gold-button full-width">LEO-KART Ödəniş</button>
+
+            <div id="leo-payment-flow" class="hidden" style="margin-top: 20px;">
+                <form id="leo-amount-form">
+                    <input type="number" id="leo-deposit-amount" placeholder="Ödəniş Minimum 5.00 AZN" step="0.01" min="5.00" required>
+                    <button type="submit" class="gold-button" style="margin-top: 15px;">İrəli</button>
+                </form>
+                
+                <div id="leo-details" class="hidden">
+                    <p class="warning-text">Depozit üçün kart hesabına ödəniş et</p>
+                    <div class="card-number-display">
+                        <span>5411249812290497</span>
+                        <button id="copy-leo-card" class="gold-button small-button"><i class="fas fa-copy"></i> Kopyala</button>
+                    </div>
+                    <p id="account-id-display" class="gold-text" style="font-size: 0.9em; margin-top: 10px;">Hesab ID-niz yadda saxlanıldı.</p>
+                    <div id="leo-timer-display" class="timer-display">10:00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
